@@ -1,4 +1,4 @@
-package com.cg.service;
+package com.cg.service.transfer;
 
 
 import com.cg.model.Customer;
@@ -10,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -45,18 +46,22 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
-    public void doTransfer(Transfer transfer) {
+    public Map<String, Object> doTransfer(Transfer transfer) {
+
+        Map<String, Object> results = new HashMap<>();
 
         transferRepository.save(transfer);
 
-        Customer sender = transfer.getSender();
-        BigDecimal senderBalance = sender.getBalance().subtract(transfer.getTransactionAmount());
-        sender.setBalance(senderBalance);
-        customerRepository.save(sender);
+        customerRepository.reduceBalance(transfer.getSender().getId(), transfer.getTransactionAmount());
 
-        Customer recipient = transfer.getRecipient();
-        BigDecimal recipientBalance = recipient.getBalance().add(transfer.getTransferAmount());
-        recipient.setBalance(recipientBalance);
-        customerRepository.save(recipient);
+        customerRepository.incrementBalance(transfer.getRecipient().getId(), transfer.getTransferAmount());
+
+        Customer sender = transfer.getSender().setBalance(transfer.getSender().getBalance().subtract(transfer.getTransactionAmount()));
+        Customer recipient = transfer.getRecipient().setBalance(transfer.getRecipient().getBalance().add(transfer.getTransferAmount()));
+
+        results.put("sender", sender.toCustomerDTO());
+        results.put("recipient", recipient.toCustomerDTO());
+
+        return results;
     }
 }

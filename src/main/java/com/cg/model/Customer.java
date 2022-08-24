@@ -32,9 +32,6 @@ public class Customer extends BaseEntity {
     @Column(name = "full_name")
     private String fullName;
 
-    @NotBlank(message = "Vui lòng nhập email")
-    @Size(min = 5, max = 20, message = "Độ dài email từ 5-20 ký tự")
-    @Email(message = "Vui lòng nhập đúng kiểu email")
     @Column(nullable = false, unique = true)
     private String email;
 

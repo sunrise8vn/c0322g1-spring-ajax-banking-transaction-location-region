@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @NoArgsConstructor
@@ -19,8 +22,15 @@ import java.math.BigDecimal;
 public class CustomerDTO {
 
     private Long id;
+
+    @NotBlank(message = "Vui lòng nhập họ tên")
     private String fullName;
+
+    @NotBlank(message = "Vui lòng nhập email")
+    @Size(min = 5, max = 20, message = "Độ dài email từ 5-20 ký tự")
+    @Email(message = "Vui lòng nhập đúng kiểu email")
     private String email;
+
     private String phone;
     private BigDecimal balance;
 

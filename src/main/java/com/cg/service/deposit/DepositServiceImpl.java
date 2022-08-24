@@ -1,4 +1,4 @@
-package com.cg.service;
+package com.cg.service.deposit;
 
 
 import com.cg.model.Customer;

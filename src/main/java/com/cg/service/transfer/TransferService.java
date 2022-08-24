@@ -1,9 +1,11 @@
-package com.cg.service;
+package com.cg.service.transfer;
 
 import com.cg.model.Transfer;
 import com.cg.model.dto.TransferHistoryDTO;
+import com.cg.service.IGeneralService;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TransferService extends IGeneralService<Transfer> {
 
@@ -11,5 +13,5 @@ public interface TransferService extends IGeneralService<Transfer> {
 
     List<TransferHistoryDTO> findAllHistories();
 
-    void doTransfer(Transfer transfer);
+    Map<String, Object> doTransfer(Transfer transfer);
 }

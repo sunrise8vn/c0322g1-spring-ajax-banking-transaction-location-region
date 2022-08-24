@@ -34,4 +34,11 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             "SET c.balance = c.balance + :balance " +
             "WHERE c.id = :customerId")
     void incrementBalance(@Param("customerId") Long customerId, @Param("balance") BigDecimal balance);
+
+
+    @Modifying
+    @Query("UPDATE Customer AS c " +
+            "SET c.balance = c.balance - :balance " +
+            "WHERE c.id = :customerId")
+    void reduceBalance(@Param("customerId") Long customerId, @Param("balance") BigDecimal balance);
 }

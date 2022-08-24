@@ -1,9 +1,8 @@
 package com.cg.controller;
 
 
-import com.cg.model.Transfer;
 import com.cg.model.dto.TransferHistoryDTO;
-import com.cg.service.TransferService;
+import com.cg.service.transfer.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

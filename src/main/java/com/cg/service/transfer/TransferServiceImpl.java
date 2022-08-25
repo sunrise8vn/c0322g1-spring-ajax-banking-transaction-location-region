@@ -31,6 +31,11 @@ public class TransferServiceImpl implements TransferService {
     }
 
     @Override
+    public Transfer getById(Long id) {
+        return null;
+    }
+
+    @Override
     public List<Transfer> findAll() {
         return transferRepository.findAll();
     }
@@ -43,6 +48,11 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public Transfer save(Transfer transfer) {
         return transferRepository.save(transfer);
+    }
+
+    @Override
+    public void remove(Long id) {
+
     }
 
     @Override

@@ -28,6 +28,11 @@ public class DepositServiceImpl implements DepositService {
     }
 
     @Override
+    public Deposit getById(Long id) {
+        return null;
+    }
+
+    @Override
     public List<Deposit> findAll() {
         return null;
     }
@@ -35,6 +40,11 @@ public class DepositServiceImpl implements DepositService {
     @Override
     public Deposit save(Deposit deposit) {
         return depositRepository.save(deposit);
+    }
+
+    @Override
+    public void remove(Long id) {
+
     }
 
     @Override

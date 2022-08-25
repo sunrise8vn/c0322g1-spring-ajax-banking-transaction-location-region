@@ -22,6 +22,11 @@ public class LocationRegionServiceImpl implements LocationRegionService {
     }
 
     @Override
+    public LocationRegion getById(Long id) {
+        return null;
+    }
+
+    @Override
     public List<LocationRegion> findAll() {
         return null;
     }
@@ -29,5 +34,10 @@ public class LocationRegionServiceImpl implements LocationRegionService {
     @Override
     public LocationRegion save(LocationRegion locationRegion) {
         return locationRegionRepository.save(locationRegion);
+    }
+
+    @Override
+    public void remove(Long id) {
+
     }
 }

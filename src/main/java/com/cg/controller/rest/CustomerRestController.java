@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -97,7 +98,9 @@ public class CustomerRestController {
         return new ResponseEntity<>(newCustomer.toCustomerDTO(), HttpStatus.CREATED);
     }
 
+
     @PostMapping("/deposit")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<?> doDeposit(@Validated @RequestBody DepositDTO depositDTO, BindingResult bindingResult) {
 
         new DepositDTO().validate(depositDTO, bindingResult);

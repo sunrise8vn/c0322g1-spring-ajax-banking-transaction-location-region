@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/assets/css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome">
+            <div class="pinkbox">
+                <div class="signup nodisplay">
+                    <h1>register</h1>
+                    <form autocomplete="off">
+                        <input type="text" placeholder="username">
+                        <input type="email" placeholder="email">
+                        <input type="password" placeholder="password">
+                        <input type="password" placeholder="confirm password">
+                        <button class="button submit">create account </button>
+                    </form>
+                </div>
+                <div class="signin">
+                    <h1>sign in</h1>
+                    <form class="more-padding" autocomplete="off">
+                        <input type="text" id="usernameLog" placeholder="username">
+                        <input type="text" id="passwordLog" placeholder="password">
+                        <div class="checkbox">
+                            <input type="checkbox" id="remember" />
+                            <label for="remember">remember me</label>
+                        </div>
+
+                        <button type="button" id="btnLogin" class="button submit">login</button>
+                    </form>
+                </div>
+            </div>
+            <div class="leftbox">
+                <h2 class="title"><span>BLOOM</span>&<br>BOUQUET</h2>
+                <p class="desc">pick your perfect <span>bouquet</span></p>
+                <img class="flower smaller" src="https://image.ibb.co/d5X6pn/1357d638624297b.jpg" alt="1357d638624297b" border="0">
+                <p class="account">have an account?</p>
+                <button class="button" id="signin">login</button>
+            </div>
+            <div class="rightbox">
+                <h2 class="title"><span>BLOOM</span>&<br>BOUQUET</h2>
+                <p class="desc"> pick your perfect <span>bouquet</span></p>
+                <img class="flower" src="https://preview.ibb.co/jvu2Un/0057c1c1bab51a0.jpg"/>
+                <p class="account">don't have an account?</p>
+                <button class="button" id="signup">sign up</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/jquery/jquery-v3.6.0.min.js"></script>
+    <script>
+        $('#signup').click(function() {
+            $('.pinkbox').css('transform', 'translateX(80%)');
+            $('.signin').addClass('nodisplay');
+            $('.signup').removeClass('nodisplay');
+        });
+
+        $('#signin').click(function() {
+            $('.pinkbox').css('transform', 'translateX(0%)');
+            $('.signup').addClass('nodisplay');
+            $('.signin').removeClass('nodisplay');
+        });
+
+        $("#btnLogin").on('click', () => {
+            let username = $("#usernameLog").val();
+            let password = $("#passwordLog").val();
+
+            let user = {
+                username,
+                password
+            }
+
+            $.ajax({
+                headers: {
+                    "accept": "application/json",
+                    "content-type": "application/json"
+                },
+                type: "POST",
+                url: "http://localhost:8089/api/auth/login",
+                data: JSON.stringify(user)
+            })
+            .done(() => {
+                location.href = "/customers";
+            })
+            .fail(() => {
+                alert("Error")
+            })
+        })
+    </script>
+</body>
+</html>

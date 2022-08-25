@@ -24,6 +24,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer getById(Long id) {
+        return null;
+    }
+
+    @Override
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
@@ -41,5 +46,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer save(Customer customer) {
         return customerRepository.save(customer);
+    }
+
+    @Override
+    public void remove(Long id) {
+
     }
 }
